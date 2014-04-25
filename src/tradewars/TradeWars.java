@@ -187,6 +187,7 @@ public class TradeWars {
         // update player stats on form
         bob.jTextField1.setText(String.valueOf(counter));
         bob.jTextFieldCash.setText("£" + String.valueOf(p1.getPlayerCash()));
+        bob.jTextFieldBagSpaceTotal.setText(String.valueOf(p1.getBagSize()));
         bob.jTextFieldBagSpaceFree.setText(String.valueOf(p1.getBagSize() - p1.getBagSpaceUsed()));
         bob.jTextField2.setText(gameLocations[currentPlayerLocation].getName());
         bob.jTextField3.setText(gameLocations[currentPlayerLocation].getDescription());
@@ -393,6 +394,11 @@ public class TradeWars {
                 }
             }
         }
+        else if ((gameEvents[choice].getType()).equals("bagBigger")) {
+        p1.setBagSize((p1.getBagSize()+gameEvents[choice].getQuantity()));}
+        else if ((gameEvents[choice].getType()).equals("bagSmaller")) {
+        p1.setBagSize((p1.getBagSize()-gameEvents[choice].getQuantity()));}
+        
 
         bob.jTextArea2.append(foo3 + "\n");
     }

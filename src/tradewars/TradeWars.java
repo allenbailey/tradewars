@@ -28,7 +28,6 @@ public class TradeWars {
     public static MyTableModelPlayer      playerTableModel;
 
     public static void main(String[] args) throws IOException {
-
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 bob.setVisible(true);
@@ -42,7 +41,6 @@ public class TradeWars {
         bob.jTableBag.getColumnModel().getColumn(1).setHeaderValue("Available");
         bob.jTableBag.getColumnModel().getColumn(2).setHeaderValue("Purchase Price");
         bob.jTableBag.getColumnModel().getColumn(3).setHeaderValue("Quanity Held");
-        
         bob.jButtonBuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnjButtonBuyPerformed(evt);
@@ -195,16 +193,13 @@ public class TradeWars {
         // update all of the commodities
         for (int x = 0; x < gameBag2.length; x++) {
             gameBag2[x].update3();
-
         }
 
         gameTableModel.fireTableDataChanged();
     }
 
     // Does this serve any purpose after the first loop?
-    public static void updateBag() {
-
-    }
+    public static void updateBag() {}
 
     private static void btnjButtonSellPerformed(java.awt.event.ActionEvent evt) {
         if (bob.jTableBag.getSelectedRow() == -1) {                         // No row chosen to sell?
@@ -278,7 +273,6 @@ public class TradeWars {
                         playerBag[key].setCurrentQuantity((playerBag[key].getCurrentQuantity() + desiredQuantity));
 
                         // bob.jTableBag.setValueAt((playerBag[bob.jTable1.getSelectedRow()].getCurrentQuantity()),bob.jTable1.getSelectedRow(),3);
-
                         // -------need to add code to do mean average purchase price in cases where a second quantity is purchased @ a different price
                         // CRAZY PRICE PRICE
                         // bob.jTableBag.setValueAt((gameBag2[bob.jTable1.getSelectedRow()].getCurrentCost()),bob.jTable1.getSelectedRow(),2);
@@ -368,7 +362,7 @@ public class TradeWars {
         int    choice          = tradewars.commodities.getRandomNumberFrom(0, gameEvents.length - 1);
         int    randomCommodity = tradewars.commodities.getRandomNumberFrom(0, playerBag.length - 1);
         String foo2            = (gameEvents[choice].getDescription());
-        String foo3=foo2;
+        String foo3            = foo2;
 
         if ((gameEvents[choice].getType()).equals("find")) {
             playerBag[randomCommodity].setCurrentQuantity((playerBag[randomCommodity].getCurrentQuantity()
@@ -377,12 +371,6 @@ public class TradeWars {
             playerTableModel.fireTableDataChanged();
             foo3 = foo2.replace("*", gameBag2[randomCommodity].getTitle());
         } else if ((gameEvents[choice].getType()).equals("lose")) {
-            bob.jTextArea2.append("Recognised a lose!");
-
-            if ((playerBag[randomCommodity].getCurrentQuantity() > 0)) {
-                bob.jTextArea2.append("more than none to lose!");
-            }
-
             {
                 if (((playerBag[randomCommodity].getCurrentQuantity()) >= gameEvents[choice].getQuantity())) {
                     bob.jTextArea2.append("more than " + gameEvents[choice].getQuantity() + " to lose!");
@@ -391,14 +379,18 @@ public class TradeWars {
                     p1.setBagSpaceUsed(p1.getBagSpaceUsed() - gameEvents[choice].getQuantity());
                     playerTableModel.fireTableDataChanged();
                     foo3 = foo2.replace("*", playerBag[randomCommodity].getTitle());
+                } else {
+                    foo3 = foo2.replace("*", "cash");
+                    p1.setPlayerCash(p1.getPlayerCash() - gameEvents[choice].getQuantity());
                 }
             }
+
+            // }
+        } else if ((gameEvents[choice].getType()).equals("bagBigger")) {
+            p1.setBagSize((p1.getBagSize() + gameEvents[choice].getQuantity()));
+        } else if ((gameEvents[choice].getType()).equals("bagSmaller")) {
+            p1.setBagSize((p1.getBagSize() - gameEvents[choice].getQuantity()));
         }
-        else if ((gameEvents[choice].getType()).equals("bagBigger")) {
-        p1.setBagSize((p1.getBagSize()+gameEvents[choice].getQuantity()));}
-        else if ((gameEvents[choice].getType()).equals("bagSmaller")) {
-        p1.setBagSize((p1.getBagSize()-gameEvents[choice].getQuantity()));}
-        
 
         bob.jTextArea2.append(foo3 + "\n");
     }

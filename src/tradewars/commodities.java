@@ -354,7 +354,7 @@ public class commodities {
 
                 // normal
                 //
-                this.statusMsg   = ("Normal Range");
+                this.statusMsg   = ("");
                 this.currentCost = getRandomNumberFrom(this.minCost, this.maxCost);
 
                 // System.out.print("Cost is :" + "\t" +this.currentCost);

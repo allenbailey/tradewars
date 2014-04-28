@@ -2,6 +2,7 @@ package tradewars;
 
 //~--- JDK imports ------------------------------------------------------------
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
@@ -168,7 +169,9 @@ public class TradeWars {
                               + ".jpg"));
 
         bob.jLabelLocation.setIcon(image);
-        handleGameEvent();
+        int chancer = tradewars.commodities.getRandomNumberFrom(1, 100);
+                if (chancer>70){handleGameEvent();}
+     
 
         // updateBag();
         // enable locations buttons except the current player location
@@ -193,6 +196,13 @@ public class TradeWars {
         // update all of the commodities
         for (int x = 0; x < gameBag2.length; x++) {
             gameBag2[x].update3();
+            if (!gameBag2[x].getStatusMsg().equals(""))
+            {
+            //bob.jTextArea2.setForeground(Color.BLUE);
+            bob.jTextArea2.append("[MARKET]\t"+gameBag2[x].getStatusMsg()+"\n");
+            bob.jTextArea2.setCaretPosition(bob.jTextArea2.getDocument().getLength());
+            //bob.jTextArea2.setForeground(Color.BLACK);
+            }
         }
 
         gameTableModel.fireTableDataChanged();
@@ -391,8 +401,8 @@ public class TradeWars {
         } else if ((gameEvents[choice].getType()).equals("bagSmaller")) {
             p1.setBagSize((p1.getBagSize() - gameEvents[choice].getQuantity()));
         }
-
-        bob.jTextArea2.append(foo3 + "\n");
+        
+        bob.jTextArea2.append("[EVENT]\t"+foo3 + "\n");
     }
 
     public static class MyTableModel extends AbstractTableModel {

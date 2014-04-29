@@ -1,14 +1,20 @@
 package tradewars;
 
 //~--- JDK imports ------------------------------------------------------------
-
 import java.awt.Color;
+import java.io.*;
 import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.*;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -164,15 +170,21 @@ public class TradeWars {
         updateGameLoop();
     }
 
-    public static void updateGameLoop() {
+    public static void updateGameLoop() 
+    {      try {
+//        File foop = new File((TradeWars.class.getResource("/tradewars/res/l" + currentPlayerLocation+ ".wav")).toURI() );
+        File foop = new File((TradeWars.class.getResource("/tradewars/res/l0.wav")).toURI() );
+        playSound(foop);
+        
+        
         ImageIcon image = new ImageIcon(TradeWars.class.getResource("/tradewars/res/l" + currentPlayerLocation
-                              + ".jpg"));
-
+                + ".jpg"));
+        
         bob.jLabelLocation.setIcon(image);
         int chancer = tradewars.commodities.getRandomNumberFrom(1, 100);
-                if (chancer>70){handleGameEvent();}
-     
-
+        if (chancer>70){handleGameEvent();}
+        
+        
         // updateBag();
         // enable locations buttons except the current player location
         for (int x = 0; x < 8; x++) {
@@ -198,14 +210,19 @@ public class TradeWars {
             gameBag2[x].update3();
             if (!gameBag2[x].getStatusMsg().equals(""))
             {
-            //bob.jTextArea2.setForeground(Color.BLUE);
-            bob.jTextArea2.append("[MARKET]\t"+gameBag2[x].getStatusMsg()+"\n");
-            bob.jTextArea2.setCaretPosition(bob.jTextArea2.getDocument().getLength());
-            //bob.jTextArea2.setForeground(Color.BLACK);
+                //bob.jTextArea2.setForeground(Color.BLUE);
+                bob.jTextArea2.append("[MARKET]\t"+gameBag2[x].getStatusMsg()+"\n");
+                bob.jTextArea2.setCaretPosition(bob.jTextArea2.getDocument().getLength());
+                //bob.jTextArea2.setForeground(Color.BLACK);
             }
         }
 
         gameTableModel.fireTableDataChanged();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(TradeWars.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        
     }
 
     // Does this serve any purpose after the first loop?
@@ -493,5 +510,27 @@ public class TradeWars {
             }
         }
     }
+public static void playSound(File yourFile)
+{
+    System.out.println("I'm prinitng 1");
+try {
+    System.out.println("I'm prinitng 2");
+    //File yourFile = yourFileName;
+    AudioInputStream stream;
+    AudioFormat format;
+    DataLine.Info info;
+    Clip clip;
+    
+    stream = AudioSystem.getAudioInputStream(yourFile);
+    format = stream.getFormat();
+    info = new DataLine.Info(Clip.class, format);
+    clip = (Clip) AudioSystem.getLine(info);
+    clip.open(stream);
+    clip.start();
+}
+catch (Exception e) {
+    //whatevers
+}}
+    
 }
 

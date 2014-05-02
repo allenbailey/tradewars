@@ -36,6 +36,8 @@ public class TradeWars {
     public static MyTableModelPlayer      playerTableModel;
 
     public static void main(String[] args) throws IOException {
+  
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 bob.setVisible(true);
@@ -529,8 +531,8 @@ try {
     format = stream.getFormat();
     info = new DataLine.Info(Clip.class, format);
     clip = (Clip) AudioSystem.getLine(info);
-    clip.open(stream);
-    clip.start();
+   // clip.open(stream);
+    //clip.start();
 }
 catch (Exception e) {
     //whatevers

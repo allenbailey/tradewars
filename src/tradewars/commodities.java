@@ -48,6 +48,7 @@ public class commodities {
         this.availability  = availability;
         this.minQuantity   = minQuantity;
         this.maxQuantity   = maxQuantity;
+        this.statusMsg     ="";
     }
 
     public String getStatusMsg() {

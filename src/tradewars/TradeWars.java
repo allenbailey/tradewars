@@ -18,6 +18,7 @@ import javax.sound.sampled.*;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import tradewars.blocks.Breakout;
 
 public class TradeWars {
     public static int                     counter               = 0;
@@ -417,6 +418,9 @@ public class TradeWars {
             p1.setBagSize((p1.getBagSize() + gameEvents[choice].getQuantity()));
         } else if ((gameEvents[choice].getType()).equals("bagSmaller")) {
             p1.setBagSize((p1.getBagSize() - gameEvents[choice].getQuantity()));
+            bob.disable();
+            Breakout goon = new Breakout();
+            bob.enable();
         }
         
         bob.jTextArea2.append("[EVENT]\t"+foo3 + "\n");

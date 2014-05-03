@@ -19,6 +19,7 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import tradewars.blocks.Breakout;
+import tradewars.snake.Snake;
 
 public class TradeWars {
     public static int                     counter               = 0;
@@ -421,7 +422,8 @@ public class TradeWars {
         } else if ((gameEvents[choice].getType()).equals("bagSmaller")) {
             p1.setBagSize((p1.getBagSize() - gameEvents[choice].getQuantity()));
             bob.disable();
-            Breakout goon = new Breakout();
+            //Breakout goon = new Breakout();
+            Snake goon = new Snake();
             bob.enable();
         }
         

@@ -20,11 +20,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Breakout extends JDialog {
-
-    public Breakout()
+public boolean playerHasWon;
+    
+    public  Breakout()
     {
-        
-        add(new Board());
+        playerHasWon = false;
+        add(new Board(this));
         this.setModal(true);
         setTitle("Breakout");
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -44,6 +45,7 @@ public class Breakout extends JDialog {
                   setVisible(false); //you can't see me!
 
                   dispose(); //Destroy the JFrame object
+                     //return false;
                 }
             }
         };
@@ -51,7 +53,7 @@ public class Breakout extends JDialog {
         this.addWindowListener(exitListener);
          setVisible(true);
         
-       // return false;
+       //return playerHasWon;
     }
 
     public static void main(String[] args) {

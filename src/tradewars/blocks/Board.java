@@ -37,10 +37,10 @@ public class Board extends JPanel implements Commons {
 
     boolean ingame = true;
     int timerId;
+Breakout theGameCaller;
 
-
-    public Board() {
-
+    public Board( Breakout theGameCallerSupplied) {
+theGameCaller=theGameCallerSupplied;
         addKeyListener(new TAdapter());
         setFocusable(true);
 
@@ -145,6 +145,7 @@ public class Board extends JPanel implements Commons {
             }
             if (j == 30) {
                 message = "Victory";
+                theGameCaller.playerHasWon=true;
                 stopGame();
                 
             }

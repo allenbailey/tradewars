@@ -1,6 +1,11 @@
 package tradewars.duck;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -9,7 +14,7 @@ import javax.swing.SwingUtilities;
  * @author www.gametutorial.net
  */
 
-public class Window extends JFrame{
+public class Window extends JDialog{
         
     private Window()
     {
@@ -17,7 +22,7 @@ public class Window extends JFrame{
         this.setTitle("Shoot the duck");
         
         // Sets size of the frame.
-        if(true) // Full screen mode
+        if(false) // Full screen mode
         {
             // Disables decorations for this frame.
             //this.setUndecorated(true);
@@ -35,7 +40,21 @@ public class Window extends JFrame{
         }
         
         // Exit the application when user close frame.
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        WindowListener exitListener = new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent we) {
+                //int confirm = JOptionPane.showOptionDialog(null, "Are You Sure to Close Application?", "Exit Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                //if (confirm == 0) {
+                 setVisible(false); //you can't see me!
+
+                dispose(); //Destroy the JFrame object
+               // }
+            }
+        };
+        
+        
         
         this.setContentPane(new Framework());
         

@@ -15,6 +15,15 @@ public class event {
   private String type;
   private int quantity;
 
+    public String getSound() {
+        return sound;
+    }
+
+    public void setSound(String sound) {
+        this.sound = sound;
+    }
+  private String sound;
+
     public String getDescription() {
         return description;
     }
@@ -39,10 +48,11 @@ public class event {
         this.quantity = quantity;
     }
 
-    public event(String description, String type, int quantity) {
+    public event(String description, String type, int quantity, String sound) {
         this.description = description;
         this.type = type;
         this.quantity = quantity;
+        this.sound = sound;
     }
   
     

@@ -81,6 +81,9 @@ public class Framework extends Canvas {
     {
         super();
         
+        
+        
+        
         gameState = GameState.VISUALIZING;
         
         //We start game in new thread.
@@ -305,7 +308,7 @@ public class Framework extends Canvas {
                 if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
                     System.exit(0);
             break;
-        }
+         }
     }
     
     /**

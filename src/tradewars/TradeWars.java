@@ -126,7 +126,7 @@ public class TradeWars {
         for (int F = 0; F < (Integer.parseInt(gameEventsP.getProperty("events.numberOfEntries"))); F++) {
             gameEvents[F] = new tradewars.event(gameEventsP.getProperty("event" + F + ".description"),
                     gameEventsP.getProperty("event" + F + ".type"),
-                    (Integer.parseInt(gameEventsP.getProperty("event" + F + ".quantity"))));
+                    (Integer.parseInt(gameEventsP.getProperty("event" + F + ".quantity"))),gameEventsP.getProperty("event" + F + ".sound"));
         }
 
         // Populate commodities
@@ -422,11 +422,21 @@ public class TradeWars {
         } else if ((gameEvents[choice].getType()).equals("bagSmaller")) {
             p1.setBagSize((p1.getBagSize() - gameEvents[choice].getQuantity()));
             bob.disable();
-            //Breakout goon = new Breakout();
-            Snake goon = new Snake();
+            //Breakout goon;
+            //goon = new Breakout();
+            //Snake goon = new Snake();
             bob.enable();
         }
-        
+        if ((gameEvents[choice].getSound()).equals("")){System.out.println("Empty Sound!");}
+        else
+        {   try {
+            System.out.println("Try to play " + TradeWars.class.getResource("/tradewars/res/"+gameEvents[choice].getSound()) );
+            File foop = new File((TradeWars.class.getResource("/tradewars/res/"+gameEvents[choice].getSound())).toURI() );
+            playSound(foop);
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(TradeWars.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
         bob.jTextArea2.append("[EVENT]\t"+foo3 + "\n");
     }
 
@@ -520,9 +530,9 @@ public class TradeWars {
     }
 public static void playSound(File yourFile)
 {
-    System.out.println("I'm prinitng 1");
+   // System.out.println("I'm prinitng 1");
 try {
-    System.out.println("I'm prinitng 2");
+    //System.out.println("I'm prinitng 2");
     //File yourFile = yourFileName;
     AudioInputStream stream;
     AudioFormat format;
@@ -533,8 +543,8 @@ try {
     format = stream.getFormat();
     info = new DataLine.Info(Clip.class, format);
     clip = (Clip) AudioSystem.getLine(info);
-   // clip.open(stream);
-    //clip.start();
+    clip.open(stream);
+    clip.start();
 }
 catch (Exception e) {
     //whatevers

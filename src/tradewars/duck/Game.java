@@ -142,7 +142,7 @@ public class Game {
     {
         try
         {
-            URL backgroundImgUrl = this.getClass().getResource("/shoot_the_duck/resources/images/background.jpg");
+            URL backgroundImgUrl = this.getClass().getResource("/tradewars/duck/res/background.jpg");
             backgroundImg = ImageIO.read(backgroundImgUrl);
             
             URL grassImgUrl = this.getClass().getResource("/tradewars/duck/res/grass.png");
@@ -157,6 +157,7 @@ public class Game {
             sightImgMiddleHeight = sightImg.getHeight() / 2;
         }
         catch (IOException ex) {
+            System.out.println("OOPS" + ex);
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

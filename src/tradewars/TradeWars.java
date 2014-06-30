@@ -530,10 +530,8 @@ public class TradeWars {
     }
 public static void playSound(File yourFile)
 {
-   // System.out.println("I'm prinitng 1");
+
 try {
-    //System.out.println("I'm prinitng 2");
-    //File yourFile = yourFileName;
     AudioInputStream stream;
     AudioFormat format;
     DataLine.Info info;
